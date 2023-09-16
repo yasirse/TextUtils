@@ -1,10 +1,14 @@
-import { type } from "@testing-library/user-event/dist/type";
-import Alert from "./components/Alert";
+
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
-import React,{useState} from 'react'
-
-
+import React,{useState} from 'react';
+import About from "./components/About";
+import NoPage from "./components/NoPage";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
     function App() 
     {
@@ -35,11 +39,21 @@ import React,{useState} from 'react'
 
       return (
       <>
-      <Navbar title="TextUtils" abouttext="AboutTextutils" mode={mode} toggleMode={toggleMode}/>
-      <Alert alert={alert}/>
-      <div className="container my-3">
-        <TextForm showAlert={showAlert} heading="Enter the text here to analyse"mode={mode}/>
-      </div>    
+      {/* <Navbar title="TextUtils" abouttext="AboutTextutils" mode={mode} toggleMode={toggleMode}/> */}
+      {/* <Alert alert={alert}/> */}
+      {/* <div className="container my-3"> */}
+        {/* <TextForm showAlert={showAlert} heading="Enter the text here to analyse"mode={mode}/> */}
+      {/* </div>  */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navbar title="TextUtils" abouttext="AboutTextutils" mode={mode} toggleMode={toggleMode}/>}>
+              <Route index path="/" element={<TextForm showAlert={showAlert} heading="Enter the text here to analyse"mode={mode}/>}/>
+              <Route path="/about" element={<About/>}/>
+              <Route path="*" element={<NoPage />} />
+          </Route>
+
+        </Routes>
+      </BrowserRouter>, 
       </>
   );
 }
